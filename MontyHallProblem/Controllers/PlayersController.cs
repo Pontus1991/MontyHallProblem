@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using MontyHallProblem.Services;
 
 namespace MontyHallProblem.Controllers
 {
@@ -8,11 +7,22 @@ namespace MontyHallProblem.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
+        private readonly IGetPlayers _getPlayers;
+        private readonly IRandomizeEntities _randomizeEntities;
+
+        public PlayersController(IGetPlayers getPlayers, IRandomizeEntities randomizeEntities)
+        {
+            _getPlayers = getPlayers;
+            _randomizeEntities = randomizeEntities;
+        }
+
         // GET: api/<PlayersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetPlayers()
         {
-            return new string[] { "value1", "value2" };
+            // Hämta den returnerade listan från servicesmetoden
+            var users = _getPlayers.generateListOfPlayers();
+            return Ok(users);
         }
 
         // GET api/<PlayersController>/5

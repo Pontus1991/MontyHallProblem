@@ -1,6 +1,11 @@
+using MontyHallProblem.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddTransient<IGetPlayers, GetPlayers>();
+builder.Services.AddTransient<IRandomizeEntities, RandomizeEntities>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
