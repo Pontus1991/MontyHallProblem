@@ -17,12 +17,21 @@ namespace MontyHallProblem.Controllers
         }
 
         // GET: api/<PlayersController>
-        [HttpGet]
+        [HttpGet("/players")]
         public IActionResult GetPlayers()
         {
             // Hämta den returnerade listan från servicesmetoden
             var users = _getPlayers.generateListOfPlayers();
             return Ok(users);
+        }
+
+        // GET: api/<PlayersController>
+        [HttpGet("/entities")]
+        public IActionResult GetRandomizedEntities()
+        {
+            // Hämta den returnerade listan från servicesmetoden
+            var entities = _randomizeEntities.RandomizeEntity();
+            return Ok(entities);
         }
 
         // GET api/<PlayersController>/5
